@@ -8,8 +8,6 @@
             "environmentType": "Sandbox",
             "environmentName": "sandbox-msc",
             "tenant": "19276e87-638c-4d11-b22d-6c2c2810b5d2",
-            "startupObjectId": 50150,
-            "startupObjectType": "Page",
             "breakOnError": "All",
             "launchBrowser": true,
             "enableLongRunningSqlStatements": true,
