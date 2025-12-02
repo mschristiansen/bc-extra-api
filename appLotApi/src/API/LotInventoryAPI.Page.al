@@ -109,6 +109,10 @@ page 50150 "Lot Inventory API"
     trigger OnAfterGetRecord()
     begin
         CalculateLotData();
+
+        // Skip lots with no inventory
+        if Quantity = 0 then
+            CurrPage.Skip();
     end;
 
     var
