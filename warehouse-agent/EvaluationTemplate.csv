@@ -1,0 +1,48 @@
+"# Import the test cases you want to use to test your agent"
+"#"
+"# Limitations"
+"# - maximum of 100 questions"
+"# - maximum 500 characters per question including spaces"
+"#"
+"# Imported columns"
+"# Question - User question that the agent will answer."
+"# Expected response - Expected responses to run match, similarity and compare meaning test cases."
+"# Test method type - There are a few kinds of test methods to evaluate your agent's responses: GeneralQuality, TextSimilarity, CompareMeaning, PartialMatch, ExactMatch."
+"# Passing score - This threshold is the cut-off score that separates pass from fail. You can set the passing scores for similarity and compare meaning test cases."
+"#"
+"# For more information, see the documentation."
+"#"
+question,expectedResponse,testMethodType,passingScore
+Hvad har vi i Hal5?,,GeneralQuality,
+Find sapelli-pakker,,GeneralQuality,
+Er lot 105427 reserveret?,,GeneralQuality,
+Vis eg på lager,,GeneralQuality,
+Hvad er tilgængeligt af lot 106000?,,GeneralQuality,
+Find 26mm planker,,GeneralQuality,
+Har vi blokerede pakker?,,GeneralQuality,
+Hvad betyder EE i varenummeret?,EE står for Europæisk Eg (Quercus robur),CompareMeaning,70
+Hvad betyder SA i varenummeret?,SA står for Sapelli Mahogni (Entandrophragma cylindricum),CompareMeaning,70
+Hvilke træsorter har I på lager?,,GeneralQuality,
+Hvor finder jeg azobé?,Azobé opbevares i AZOBE bin (dedikeret opbevaring af tungt azobé-træ),CompareMeaning,70
+Hvad er forskellen på Hal2 og Hal5?,Hal2 er opvarmet og primært til eg. Hal5 er uopvarmet og primært til mahogni-arter,CompareMeaning,70
+Kan A-kvalitet erstatte B-kvalitet?,Ja {or} A-kvalitet kan erstatte B-kvalitet,PartialMatch,
+Kan ikke-FSC træ bruges til FSC-jobs?,Nej {or} Ikke-FSC træ kan ikke bruges til FSC-krævende jobs,PartialMatch,
+Omregn 1 m3 til løbende meter for 26x147mm,lbm = (1 × 1.000.000) / (26 × 147) = 261.78 løbende meter,TextSimilarity,60
+Hvad er savsnit-tykkelsen?,Savsnit er cirka 4mm per snit,CompareMeaning,70
+Hvor mange emner kan jeg skære fra en 5.5m planke hvis jeg skal bruge 1.8m emner?,"3 emner (floor((5500+4)/(1800+4)) = 3)",CompareMeaning,70
+Hvad skal jeg bruge af savskåret for at få høvlet 21x140mm?,Minimum 26x147mm savskåret (tilføj 5-7mm per dimension),CompareMeaning,70
+Hvad betyder blocked=true?,Lot er blokeret (karantæne eller kvalitetskontrol) og bør ikke foreslås til kunder,CompareMeaning,70
+Hvad er typisk længde for teak?,"Plantage teak kommer i korte længder, typisk 1.0-2.5m",CompareMeaning,70
+Vis pakker i produktion,,GeneralQuality,
+Find FSC-certificeret eg,,GeneralQuality,
+Jeg skal bruge 3/3.0 4/3.3 sapelli,,GeneralQuality,
+Hvad er sourceType 37?,37 er Salgsordrelinje (Sales Line),ExactMatch,
+Hvad ligger i VM?,VM er Varemodtagelse og bør generelt være tomt,CompareMeaning,70
+Kan 52mm høvles til 45mm?,Ja {or} 52mm kan høvles til 45mm (materialetab på 7mm),PartialMatch,
+Find eg tykkere end 50mm,,GeneralQuality,
+Hvad er de typiske bredder for sapelli?,46-155mm fast bredde eller faldende,CompareMeaning,70
+Hvordan beregner jeg tilgængelighed?,"Tilgængelig = inventory_quantity + reservation_quantity (reservation er negativ)",CompareMeaning,70
+Vis information om lot 105427,,GeneralQuality,
+Hej,Hej! Jeg er din lagerassistent,TextSimilarity,60
+Tak for hjælpen,Tak fordi du brugte lagerassistenten,TextSimilarity,60
+Hvad er prisen på lot 105427?,Kostpris er ikke tilgængelig via API,CompareMeaning,70
