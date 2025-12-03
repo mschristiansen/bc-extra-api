@@ -1,32 +1,32 @@
-Ask Amr|AA|Amerikansk Ask|White Ash|Fraxinus americana
-Ask Eur|AE|Europæisk Ask|Fraxinus excelsior
-Ahorn|AH|Maple|Acer spp.
-Asp|AP|Populus tremula
-Ask Thermo|AT|Thermo-behandlet Ask|Fraxinus excelsior
-Ayous|AY|Obeche|Triplochiton scleroxylon
-Azobe|AZ|Azobé|Ekki|Lophira alata
-Bøg Eur|BE|Europæisk Bøg|Fagus sylvatica
-Birk|BI|Betula spp.
-Bøg Letdampet|BL|Letdampet Europæisk Bøg|Fagus sylvatica
-Cumaru|CU|Brazilian Teak|Dipteryx odorata
-Douglas|DO|Douglas Gran|Pseudotsuga menziesii
-Eg Amr|EA|Amerikansk Hvid-Eg|White Oak|Quercus alba
-Eg Eur|EE|Europæisk Eg|Quercus robur|Eg
-Elm|EL|Ulmus spp.
-Fyr Thermo|FT|Thermo-behandlet Fyr|Pinus sylvestris
-Fyr|FY|Scots Pine|Pinus sylvestris
-Gran|GR|Norway Spruce|Picea abies
-Ipe|IP|Ipé|Brazilian Walnut|Handroanthus spp.
-Iroko|IR|Kambala|Milicia excelsa
-Jatoba|JA|Jatobá|Brazilian Cherry|Hymenaea courbaril
-Lærk Eur|LE|Europæisk Lærk|Larix decidua|Lærk
-Lærk Sib|LS|Sibirisk Lærk|Larix sibirica
-Merbau|ME|Intsia spp.
-Oregon Pine|OP|Douglas Fir|Pseudotsuga menziesii
-Robinie|RO|Black Locust|Robinia pseudoacacia
-Sapelli|SA|Sapelli Mahogni|Entandrophragma cylindricum|Mahogni
-Sipo|SI|Sipo Mahogni|Utile|Entandrophragma utile
-Tiama|TI|Tiama Mahogni|Entandrophragma ivorense
-Teak Plantage|TP|Plantage Teak|Tectona grandis|Teak
-Valnød Amr|VA|Amerikansk Valnød|Juglans nigra|Valnød
-Wenge|WE|Wengé|Millettia laurentii
+Ask Amr|AA|Amerikansk Ask|White Ash
+Ask Eur|AE|Europæisk Ask|Ask
+Ask Thermo|AT|Thermo-behandlet Ask
+Ahorn|AH|Maple
+Asp|AP
+Ayous|AY|Obeche
+Azobe|AZ|Azobé|Ekki
+Bøg Eur|BE|Europæisk Bøg|Bøg
+Birk|BI
+Bøg Letdampet|BL|Letdampet Europæisk Bøg
+Cumaru|CU|Brazilian Teak
+Douglas|DO|Douglas Gran
+Eg Amr|EA|Amerikansk Hvid-Eg|White Oak
+Eg Eur|EE|Europæisk Eg|Eg
+Elm|EL
+Fyr|FY|Scots Pine
+Fyr Thermo|FT|Thermo-behandlet Fyr
+Gran|GR|Norway Spruce
+Ipe|IP|Ipé|Brazilian Walnut
+Iroko|IR|Kambala
+Jatoba|JA|Jatobá|Brazilian Cherry
+Lærk Eur|LE|Europæisk Lærk|Lærk
+Lærk Sib|LS|Sibirisk Lærk
+Merbau|ME
+Oregon Pine|OP|Douglas Fir
+Robinie|RO|Black Locust
+Sapelli|SA|Sapelli Mahogni|Mahogni
+Sipo|SI|Sipo Mahogni|Utile
+Tiama|TI|Tiama Mahogni
+Teak Plantage|TP|Plantage Teak|Teak
+Valnød Amr|VA|Amerikansk Valnød|Valnød
+Wenge|WE|Wengé
