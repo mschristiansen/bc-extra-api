@@ -1,0 +1,20 @@
+"# Import the test cases you want to use to test your agent"
+"#"
+"# Limitations"
+"# - maximum of 100 questions"
+"# - maximum 500 characters per question including spaces"
+"#"
+"# Imported columns"
+"# Question - User question that the agent will answer."
+"# Expected response - Expected responses to run match, similarity and compare meaning test cases."
+"# Test method type - There are a few kinds of test methods to evaluate your agent's responses: GeneralQuality, TextSimilarity, CompareMeaning, PartialMatch, ExactMatch."
+"# Passing score - This threshold is the cut-off score that separates pass from fail. You can set the passing scores for similarity and compare meaning test cases."
+"#"
+"# For more information, see the documentation."
+"#"
+question,expectedResponse,testMethodType,passingScore
+What kind of pizzas do you recommend for vegetarians?,,GeneralQuality,
+I'm allergic to gluten. Do you have any pizza recommendations for me?,Unfortunately we're not offering any gluten-free pizzas.,TextSimilarity,70
+Which pizza would you recommend for someone who loves meat?,Diavola,ExactMatch,
+What's the most popular pizza type right now?,Margherita {or} Diavola,PartialMatch,
+Can you suggest a pizza for someone who doesn't like spicy food?,Margherita usually fits very well to people who don't like spicy food,CompareMeaning,70
