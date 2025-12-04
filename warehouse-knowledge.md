@@ -244,6 +244,39 @@ Varenumre følger formatet: `XXYYY-dimensioner+kvalitet`
 - Ikke-FSC træ KAN IKKE bruges til FSC-krævende jobs
 - Foretruk eksakt match når muligt
 
+### Europæisk Eg-klassificering (EN 975-1)
+
+Europæisk eg klassificeres efter standarden EN 975-1. Formatet er **Q-XX** hvor:
+
+**Første bogstav — Art:**
+- **Q** = Quercus (eg)
+
+**Andet bogstav — Produkttype:**
+
+| Kode | Type | Beskrivelse |
+|------|------|-------------|
+| QB | Boules | Hele stammer, naturlig rund form |
+| QS | Selected Boards | Lange, brede brædder i varierende tykkelser |
+| QF | Fixe/Kantskåret | Savskåret, kantskåret, dimensioneret træ |
+| QP | Bjælker | Kantskåret til kundespecifikationer |
+
+**Tredje tegn — Kvalitetsgrad:**
+
+| Grad | Navn | Beskrivelse |
+|------|------|-------------|
+| A | Prime | Højeste kvalitet, næsten fejlfri. Meget få knaster, kun små saftbånd tilladt. Til møbler, beklædning, finsnedkeri. |
+| 1 | FAS/First | Meget høj kvalitet, få fejl. Tilsvarer amerikansk FAS. |
+| 2 | Joinery | Flere knaster og saft tilladt. Ofte til konstruktion. |
+| 3 | Character | Karaktertræ med farvevariation, revner, knaster. Kan være eftertragtet til rustikt look. |
+| 4 | Poor | Lav kvalitet, bør undgås. |
+
+**Eksempler:**
+- `Q-F1A` = Eg, kantskåret, grad 1A (høj kvalitet)
+- `Q-S2` = Eg, udvalgte brædder, joinery-kvalitet
+- `Q-BA` = Eg, boules, prime kvalitet
+
+**Bemærk:** Vores interne A/B/S-system er baseret på bredde fra kaskadeskæring og svarer ikke direkte til EN 975-1 kvalitetsgrader.
+
 ### Mængdeenheder
 
 Træ lagres i en af tre enheder:
@@ -375,7 +408,7 @@ Ved valg af pakker til et job, overvej at skære flere emner fra længere pakker
 
 **Formel for emner fra en pakke:**
 ```
-emner = floor((pakke_længde_mm + savsnit) / (emne_længde_mm + savsnit))
+emner = floor(pakke_længde_mm / (emne_længde_mm + savsnit))
 spild = pakke_længde - (emner × emne_længde) - ((emner - 1) × savsnit)
 ```
 
@@ -383,15 +416,15 @@ spild = pakke_længde - (emner × emne_længde) - ((emner - 1) × savsnit)
 
 | Pakke | Beregning | Emner | Spild | Spild/emne |
 |-------|-----------|-------|-------|------------|
-| 6,0m | floor((6000+4)/(1800+4)) = 3 | 3 | 6000 - 3×1800 - 2×4 = 592mm | 197mm |
-| 5,5m | floor((5500+4)/(1800+4)) = 3 | 3 | 5500 - 3×1800 - 2×4 = 92mm | **31mm** ★ |
-| 3,8m | floor((3800+4)/(1800+4)) = 2 | 2 | 3800 - 2×1800 - 1×4 = 196mm | 98mm |
-| 2,5m | floor((2500+4)/(1800+4)) = 1 | 1 | 2500 - 1×1800 = 700mm | 700mm |
+| 6,0m | floor(6000/(1800+4)) = 3 | 3 | 6000 - 3×1800 - 2×4 = 592mm | 197mm |
+| 5,5m | floor(5500/(1800+4)) = 3 | 3 | 5500 - 3×1800 - 2×4 = 92mm | **31mm** ★ |
+| 3,8m | floor(3800/(1800+4)) = 2 | 2 | 3800 - 2×1800 - 1×4 = 196mm | 98mm |
+| 2,5m | floor(2500/(1800+4)) = 1 | 1 | 2500 - 1×1800 = 700mm | 700mm |
 
 **Vinder:** 5,5m pakke giver 3 emner med kun 31mm spild per emne.
 
 **Generelle principper:**
-- Beregn emner = floor((pakke_længde + savsnit) / (emne_længde + savsnit))
+- Beregn emner = floor(pakke_længde / (emne_længde + savsnit))
 - Sammenlign spild per emne på tværs af tilgængelige pakker
 - Brug kortere pakker først når de passer godt til kravet
 - Gem længere pakker i reserve — de giver mere fleksibilitet til fremtidige jobs
@@ -690,6 +723,26 @@ spild_per_snit = råmateriale_tykkelse × savsnit
 1. Find den nødvendige savskårne dimension (færdig + høvletillæg)
 2. Vælg råmateriale hvor tykkelsen matcher den *mindste* savskårne dimension
 3. Flæk til den *største* savskårne dimension
+
+### Prioritering af Sideskær (S-kvalitet)
+
+**Hovedregel:** Brug altid den laveste kvalitet der kan opfylde kravene til det færdige produkt. Sideskær (S) er væsentligt billigere end B-kvalitet.
+
+**Undtagelse fra tykkelsesreglen:** Når S-kvalitet er tilgængelig, prioriteres den over højere kvaliteter — selv hvis det betyder mere spild ved flækning.
+
+**Eksempel: Skal bruge 26×52mm savskåret**
+
+| Mulighed | Kvalitet | Flækspild | Anbefaling |
+|----------|----------|-----------|------------|
+| 52mm S-kvalitet → flæk til 26mm | S (billigst) | 52mm × 4mm = 208mm² | **Vælg denne** ★ |
+| 26mm B-kvalitet → flæk til 52mm | B (dyrere) | 26mm × 4mm = 104mm² | Undgå — dyrere materiale |
+
+**Forklaring:** Selvom 52mm S giver dobbelt så meget flækspild, opvejes dette af den markant lavere kubikmeterpris på S-kvalitet sammenlignet med B-kvalitet.
+
+**Prioriteringsrækkefølge for kvalitet:**
+1. S (sideskær) — altid første valg hvis tilgængelig og anvendelig
+2. B — hvis S ikke kan opfylde behovet
+3. A — kun hvis B ikke er tilgængelig eller bredden kræver det
 
 ## Maskiner og Kapaciteter
 
