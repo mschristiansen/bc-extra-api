@@ -27,9 +27,9 @@ Hvor finder jeg azobé?,Azobé opbevares i AZOBE bin (dedikeret opbevaring af tu
 Hvad er forskellen på Hal2 og Hal5?,Hal2 er opvarmet og primært til eg. Hal5 er uopvarmet og primært til mahogni-arter,CompareMeaning,70
 Kan A-kvalitet erstatte B-kvalitet?,Ja {or} A-kvalitet kan erstatte B-kvalitet,PartialMatch,
 Kan ikke-FSC træ bruges til FSC-jobs?,Nej {or} Ikke-FSC træ kan ikke bruges til FSC-krævende jobs,PartialMatch,
-Omregn 1 m3 til løbende meter for 26x147mm,lbm = (1 × 1.000.000) / (26 × 147) = 261.78 løbende meter,TextSimilarity,60
+Omregn 1 m3 til løbende meter for 26x147mm,lbm = (1 × 1.000.000) / (26 × 147) = 261.64 løbende meter,TextSimilarity,60
 Hvad er savsnit-tykkelsen?,Savsnit er cirka 4mm per snit,CompareMeaning,70
-Hvor mange emner kan jeg skære fra en 5.5m planke hvis jeg skal bruge 1.8m emner?,"3 emner (floor((5500+4)/(1800+4)) = 3)",CompareMeaning,70
+Hvor mange emner kan jeg skære fra en 5.5m planke hvis jeg skal bruge 1.8m emner?,"3 emner (floor(5500/(1800+4)) = 3)",CompareMeaning,70
 Hvad skal jeg bruge af savskåret for at få høvlet 21x140mm?,Minimum 26x147mm savskåret (tilføj 5-7mm per dimension),CompareMeaning,70
 Hvad betyder blocked=true?,Lot er blokeret (karantæne eller kvalitetskontrol) og bør ikke foreslås til kunder,CompareMeaning,70
 Hvad er typisk længde for teak?,"Plantage teak kommer i korte længder, typisk 1.0-2.5m",CompareMeaning,70
@@ -46,3 +46,17 @@ Vis information om lot 105427,,GeneralQuality,
 Hej,Hej! Jeg er din lagerassistent,TextSimilarity,60
 Tak for hjælpen,Tak fordi du brugte lagerassistenten,TextSimilarity,60
 Hvad er prisen på lot 105427?,Kostpris er ikke tilgængelig via API,CompareMeaning,70
+Hvad vejer 100 lbm 20x40mm sapelli lister?,"50.4 kg (m³ = (20 × 40 × 100) / 1.000.000 = 0.08 m³, vægt = 0.08 × 630 = 50.4 kg)",CompareMeaning,70
+Hvad vejer europæisk eg per m³?,720 kg/m³,ExactMatch,
+Hvad vejer azobé per m³?,1070 kg/m³,ExactMatch,
+Hvad er den tungeste træsort?,"Cumaru (1090 kg/m³) eller Azobé (1070 kg/m³)",CompareMeaning,70
+Hvad er maksimal bredde til høvling?,260mm (Weinig Cube),CompareMeaning,70
+Hvilken maskine bruger jeg til flækning?,Raimann KR 610 M eller CML SCA650R,CompareMeaning,70
+Hvad er maksimal emnetykkelse på Dimter kapsaven?,100mm,CompareMeaning,70
+Hvilken maskine til optimeret afkortning?,Dimter S90 XL,CompareMeaning,70
+Hvilken kvalitet skal jeg vælge først?,S (sideskær) - altid første valg hvis tilgængelig og anvendelig,CompareMeaning,70
+Hvorfor prioritere S-kvalitet over B?,S-kvalitet er væsentligt billigere end B-kvalitet,CompareMeaning,70
+Hvis jeg halverer et 3m emne med 10cm krumning hvor meget krumning har hver del?,5cm (krumning halveres ved halvering af længden),CompareMeaning,70
+Hvad betyder Q-F1A i eg-klassificering?,Eg kantskåret grad 1A (høj kvalitet) efter EN 975-1,CompareMeaning,70
+Skal jeg vælge tykkelse eller bredde først ved materialevalg?,Tykkelse først - match råmaterialetykkelse til mindste savskårne dimension,CompareMeaning,70
+Hvad er CNC arbejdsområdet?,5000x1300mm (Weeke Venture 5M),CompareMeaning,70
