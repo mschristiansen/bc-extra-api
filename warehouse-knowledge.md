@@ -314,6 +314,16 @@ styk = lbm / længde_m
 - m³ = (52 × 100 × 3,2 × 50) / 1.000.000 = **0,832 m³**
 - Eller: lbm = 3,2m × 50 = 160 lbm → m³ = (160 × 52 × 100) / 1.000.000 = **0,832 m³**
 
+**Vægtberegning:**
+```
+vægt_kg = m³ × vægt_kg_per_m³
+```
+
+**Eksempel (vægt af 100 lbm 20×40mm Sapelli lister):**
+- Sapelli vægt: 630 kg/m³ (se Træsortsreference)
+- m³ = (20 × 40 × 100) / 1.000.000 = **0,08 m³**
+- vægt = 0,08 × 630 = **50,4 kg**
+
 ### Savskåret vs Høvlet
 
 **Savskåret (S/K):** Overflade direkte fra sav. Ru overflade.
@@ -943,37 +953,37 @@ Manuel afrundingsmaskine til endefræsning og affasning.
 
 ## Træsortsreference
 
-| Kode | Kort Navn | Fuldt Navn | Latinsk Navn |
-|------|-----------|------------|--------------|
-| AA | Ask Amr | Amerikansk Ask (White Ash) | Fraxinus americana |
-| AE | Ask Eur | Europæisk Ask | Fraxinus excelsior |
-| AH | Ahorn | Ahorn (Maple) | Acer spp. |
-| AP | Asp | Asp | Populus tremula |
-| AT | Ask Thermo | Thermo-behandlet Ask | Fraxinus excelsior |
-| AY | Ayous | Ayous (Obeche) | Triplochiton scleroxylon |
-| AZ | Azobe | Azobé (Ekki) | Lophira alata |
-| BE | Bøg Eur | Europæisk Bøg | Fagus sylvatica |
-| BI | Birk | Birk | Betula spp. |
-| BL | Bøg Letdampet | Letdampet Europæisk Bøg | Fagus sylvatica |
-| CU | Cumaru | Cumaru (Brazilian Teak) | Dipteryx odorata |
-| DO | Douglas | Douglas Gran | Pseudotsuga menziesii |
-| EA | Eg Amr | Amerikansk Hvid-Eg (White Oak) | Quercus alba |
-| EE | Eg Eur | Europæisk Eg | Quercus robur |
-| EL | Elm | Elm | Ulmus spp. |
-| FT | Fyr Thermo | Thermo-behandlet Fyr | Pinus sylvestris |
-| FY | Fyr | Fyr (Scots Pine) | Pinus sylvestris |
-| GR | Gran | Gran (Norway Spruce) | Picea abies |
-| IP | Ipe | Ipé (Brazilian Walnut) | Handroanthus spp. |
-| IR | Iroko | Iroko (Kambala) | Milicia excelsa |
-| JA | Jatoba | Jatobá (Brazilian Cherry) | Hymenaea courbaril |
-| LE | Lærk Eur | Europæisk Lærk | Larix decidua |
-| LS | Lærk Sib | Sibirisk Lærk | Larix sibirica |
-| ME | Merbau | Merbau | Intsia spp. |
-| OP | Oregon Pine | Oregon Pine (Douglas Fir) | Pseudotsuga menziesii |
-| RO | Robinie | Robinie (Black Locust) | Robinia pseudoacacia |
-| SA | Sapelli | Sapelli Mahogni | Entandrophragma cylindricum |
-| SI | Sipo | Sipo Mahogni (Utile) | Entandrophragma utile |
-| TI | Tiama | Tiama Mahogni | Entandrophragma ivorense |
-| TP | Teak Plantage | Plantage Teak | Tectona grandis |
-| VA | Valnød Amr | Amerikansk Valnød | Juglans nigra |
-| WE | Wenge | Wengé | Millettia laurentii |
+| Kode | Kort Navn | Fuldt Navn | Latinsk Navn | Vægt (kg/m³) |
+|------|-----------|------------|--------------|--------------|
+| AA | Ask Amr | Amerikansk Ask (White Ash) | Fraxinus americana | 670 |
+| AE | Ask Eur | Europæisk Ask | Fraxinus excelsior | 700 |
+| AH | Ahorn | Ahorn (Maple) | Acer spp. | 700 |
+| AP | Asp | Asp | Populus tremula | 490 |
+| AT | Ask Thermo | Thermo-behandlet Ask | Fraxinus excelsior | 600 |
+| AY | Ayous | Ayous (Obeche) | Triplochiton scleroxylon | 390 |
+| AZ | Azobe | Azobé (Ekki) | Lophira alata | 1070 |
+| BE | Bøg Eur | Europæisk Bøg | Fagus sylvatica | 720 |
+| BI | Birk | Birk | Betula spp. | 650 |
+| BL | Bøg Letdampet | Letdampet Europæisk Bøg | Fagus sylvatica | 720 |
+| CU | Cumaru | Cumaru (Brazilian Teak) | Dipteryx odorata | 1090 |
+| DO | Douglas | Douglas Gran | Pseudotsuga menziesii | 530 |
+| EA | Eg Amr | Amerikansk Hvid-Eg (White Oak) | Quercus alba | 750 |
+| EE | Eg Eur | Europæisk Eg | Quercus robur | 720 |
+| EL | Elm | Elm | Ulmus spp. | 680 |
+| FT | Fyr Thermo | Thermo-behandlet Fyr | Pinus sylvestris | 420 |
+| FY | Fyr | Fyr (Scots Pine) | Pinus sylvestris | 520 |
+| GR | Gran | Gran (Norway Spruce) | Picea abies | 470 |
+| IP | Ipe | Ipé (Brazilian Walnut) | Handroanthus spp. | 1050 |
+| IR | Iroko | Iroko (Kambala) | Milicia excelsa | 660 |
+| JA | Jatoba | Jatobá (Brazilian Cherry) | Hymenaea courbaril | 910 |
+| LE | Lærk Eur | Europæisk Lærk | Larix decidua | 590 |
+| LS | Lærk Sib | Sibirisk Lærk | Larix sibirica | 650 |
+| ME | Merbau | Merbau | Intsia spp. | 800 |
+| OP | Oregon Pine | Oregon Pine (Douglas Fir) | Pseudotsuga menziesii | 530 |
+| RO | Robinie | Robinie (Black Locust) | Robinia pseudoacacia | 770 |
+| SA | Sapelli | Sapelli Mahogni | Entandrophragma cylindricum | 630 |
+| SI | Sipo | Sipo Mahogni (Utile) | Entandrophragma utile | 650 |
+| TI | Tiama | Tiama Mahogni | Entandrophragma ivorense | 560 |
+| TP | Teak Plantage | Plantage Teak | Tectona grandis | 670 |
+| VA | Valnød Amr | Amerikansk Valnød | Juglans nigra | 610 |
+| WE | Wenge | Wengé | Millettia laurentii | 870 |

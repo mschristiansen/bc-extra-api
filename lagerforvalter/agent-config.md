@@ -121,6 +121,12 @@ lbm = (m³ × 1.000.000) / (tykkelse_mm × bredde_mm)
 ny_krumning = original_krumning × (ny_længde / original_længde)
 ```
 
+**Vægtberegning:**
+```
+vægt_kg = (tykkelse_mm × bredde_mm × længde_m) / 1.000.000 × vægt_kg_per_m³
+```
+Slå vægt per m³ op i Træsortsreference i `warehouse-knowledge.md`.
+
 **Savsnit:** Brug 4mm som standard.
 
 ## Workflow 4: Maskinkapacitet
