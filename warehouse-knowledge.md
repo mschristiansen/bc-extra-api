@@ -213,7 +213,7 @@ Varenumre følger formatet: `XXYYY-dimensioner+kvalitet`
 | Position | Betydning | Værdier |
 |----------|-----------|---------|
 | 1-2 | Træsort | Se træsortstabel nedenfor |
-| 3 | Forarbejdning | S=Savskåret, K=Savskåret, H=Høvlet, P=Plots, B=Blokvarer, F=Faldende |
+| 3 | Forarbejdning | S=Savskåret, K=Savskåret (legacy), H=Høvlet, P=Plots, B=Blokvarer, F=Faldende |
 | 4 | Fugtighed | V=10-14%, L=Lagret, K=Kammertørt |
 | 5 | Certificering | U=Ucertificeret, F=FSC 100% |
 | Efter bindestreg | Dimensioner | Fast bredde: tykkelse×bredde (f.eks. `50100` = 50×100mm). Varierende bredde (P/B/F): kun tykkelse (f.eks. `52` = 52mm) |
@@ -237,6 +237,7 @@ Varenumre følger formatet: `XXYYY-dimensioner+kvalitet`
 **Kvalitetsgrader:** A (bedst), B, S (sideskær)
 - Højere kvalitet KAN erstatte lavere (A → B → S)
 - Men højere kvalitet koster mere — foretruk eksakt match for at kontrollere omkostninger
+- Se også: [Udvælgelse af Råtræ](#udvælgelse-af-råtræ) for detaljer om kvalitetskaskade og pakkevalg
 
 **Certificering:** FSC 100%, Ucertificeret
 - FSC-certificeret træ KAN bruges til ikke-FSC jobs
@@ -288,13 +289,20 @@ styk = lbm / længde_m
 
 **Konvertering fra savskåret til høvlet:**
 - Kun muligt med savskåret materiale med fast bredde
-- Høvlen fjerner 5-15mm fra både tykkelse og bredde
+- Høvlen fjerner materiale fra både tykkelse og bredde
 - Skal medregne materialetab ved planlægning
+
+**Typisk høvletillæg:**
+| Materialets tilstand | Tillæg per dimension |
+|----------------------|----------------------|
+| Kammertørret, stabilt | 5-7mm (standard) |
+| Lufttørret eller let skævt | 8-10mm |
+| Grønt eller meget skævt | 10-15mm |
 
 **Beregning af minimum savskåret dimension for høvlet produkt:**
 ```
-savskåret_tykkelse = høvlet_tykkelse + 5 til 7mm (minimum)
-savskåret_bredde = høvlet_bredde + 5 til 7mm (minimum)
+savskåret_tykkelse = høvlet_tykkelse + høvletillæg (typisk 5-7mm)
+savskåret_bredde = høvlet_bredde + høvletillæg (typisk 5-7mm)
 ```
 
 **Eksempler:**
@@ -314,8 +322,29 @@ En **pakke** er det samme som et **lotnummer**. Når man refererer til "pakke nr
 
 **Vi kan kun reducere dimensioner, aldrig øge dem:**
 - Tykkelse kan reduceres (ved høvling eller gensavning)
-- Bredde kan reduceres (ved kløvning/ripsning)
+- Bredde kan reduceres (ved flækning/ripsning)
 - Længde kan reduceres (ved afkortning)
+
+### Krumning (Warp)
+
+Krumning er proportional med udstrækning. Da tykkelse og bredde på vores emner er relativt små, er krumning kun relevant på længden.
+
+**Regel:** Krumning reduceres proportionalt ved afkortning — halvering af længden halverer krumningen.
+
+**Formel:**
+```
+ny_krumning = original_krumning × (ny_længde / original_længde)
+```
+
+**Eksempel:**
+- Emne: 3,0m længde med 10cm krumning
+- Skæres i to dele à 1,5m
+- Hver del har nu: 10cm × (1,5m / 3,0m) = **5cm krumning**
+
+**Praktisk anvendelse:**
+- Hvis et emne er for krumt til høvling, kan afkortning reducere krumningen tilstrækkeligt
+- Overvej om kortere emner stadig opfylder behovet
+- Husk at medregne ekstra høvletillæg for krumme emner (se "Typisk høvletillæg" ovenfor)
 
 ### Søgelogik for Dimensioner
 
@@ -331,7 +360,14 @@ En **pakke** er det samme som et **lotnummer**. Når man refererer til "pakke nr
 ### Savsnit (Klingetykkelse)
 
 Hvert snit mister materiale til savklingen:
-- **Savsnit: ~4mm per snit** (både afkortning og kløvning)
+
+| Savtype | Typisk savsnit |
+|---------|----------------|
+| Rundsav (standard) | 3-4mm |
+| Rundsav (tyndt blad) | 2-3mm |
+| Båndsav | 2-3mm |
+
+**Beregninger i dette dokument bruger 4mm** som konservativt estimat.
 
 ### Optimering af Længdevalg
 
@@ -360,18 +396,18 @@ spild = pakke_længde - (emner × emne_længde) - ((emner - 1) × savsnit)
 - Brug kortere pakker først når de passer godt til kravet
 - Gem længere pakker i reserve — de giver mere fleksibilitet til fremtidige jobs
 
-### Optimering af Bredde (Kløvning/Ripsning)
+### Optimering af Bredde (Flækning/Ripsning)
 
 Brede brædder kan kløves til flere smallere lister.
 
 **Formel:**
 ```
-lister = floor((bræt_bredde_mm + savsnit) / (liste_bredde_mm + savsnit))
+lister = floor(bræt_bredde_mm / (liste_bredde_mm + savsnit))
 ```
 
 **Eksempel: Skal bruge 65mm lister fra 147mm bræt, savsnit = 4mm**
 ```
-lister = floor((147 + 4) / (65 + 4)) = floor(151 / 69) = 2 lister
+lister = floor(147 / (65 + 4)) = floor(147 / 69) = 2 lister
 spild = 147 - (2 × 65) - (1 × 4) = 13mm
 ```
 
@@ -565,6 +601,292 @@ Følgende arter fra sortimentet findes **ikke** i nuværende lagerbeholdning:
 - Cumaru (CU)
 - Merbau (ME)
 - Robinie (RO)
+
+## Udvælgelse af Råtræ
+
+### Pakkekøb og Prissætning
+
+Råtræ indkøbes i pakker, hvor hver pakke har ensartet kvalitet og længdeinterval. Mængden opgives i kubikmeter (m³) eller kan omregnes hertil, og afregning sker typisk til en fast kubikmeterpris.
+
+**Prisregel:** Jo lavere kvalitet, jo lavere kubikmeterpris. Derfor bør man altid vælge den laveste kvalitet af råtræ, som kan give den ønskede kvalitet på det færdige produkt.
+
+### Kvalitet og Bredde
+
+Kvalitetsgraden afspejler primært de bredder, der findes i pakken:
+
+| Kvalitet | Karakteristik | Typisk Anvendelse |
+|----------|---------------|-------------------|
+| A | Urørt pakke med brede stykker | Første skæring til brede planker |
+| B | Restmateriale efter A-skæring | Mellembredder og smalle planker |
+| S | Sideskær | Smalle lister og specialemner |
+
+### Skæreproces og Kvalitetskaskade
+
+Når en pakke forarbejdes, følges en kaskadeproces hvor bredere planker skæres først:
+
+**Eksempel: Sapelli 26mm plots (A-kvalitet, faldende bredde)**
+
+```
+Trin 1: Skær 147mm planker (savskåret mål)
+        ↓
+        Restmateriale → klassificeres som B-kvalitet
+        ↓
+Trin 2: Skær 100mm planker fra B-kvalitet
+        ↓
+Trin 3: Skær 52mm og 40mm planker fra det resterende
+```
+
+**Resultat:** Én A-kvalitetspakke med faldende bredder giver planker i 147mm, 100mm, 52mm og 40mm.
+
+### Vigtige Regler for Pakkevalg
+
+1. **Brug aldrig A-kvalitet til smalle planker**
+   - A-kvalitet har bred træ og høj pris — spild at bruge til smalle emner
+   - Vælg B-kvalitet eller lavere til smalle bredder
+
+2. **Forsøg ikke at få flere bredder fra samme kvalitet**
+   - En pakke der er skåret til 147mm kan ikke efterfølgende give flere 147mm planker
+   - Det resterende er per definition B-kvalitet
+
+3. **Bredere planker = højere fleksibilitet = højere pris**
+   - Brede planker kan skæres til mange forskellige bredder
+   - Smalle planker har begrænset anvendelse
+   - Derfor afspejles fleksibiliteten i kubikmeterpris
+
+### Beslutningsmatrix for Pakkevalg
+
+| Ønsket Plankebredde | Vælg Kvalitet | Begrundelse |
+|---------------------|---------------|-------------|
+| ≥140mm | A | Kræver brede stykker |
+| 100-139mm | A eller B | Afhænger af tilgængelighed |
+| 52-99mm | B | God balance mellem pris og udbytte |
+| ≤51mm | B eller S | Laveste pris for smalle emner |
+
+### Minimering af Spild ved Dimensionsvalg
+
+**Grundprincip:** Vælg altid råmateriale med dimensioner så tæt som muligt på det færdige produkts dimensioner for at minimere spild.
+
+**Dimension-terminologi:**
+- **Tykkelse** = den mindste af to dimensioner (f.eks. 20mm i 20×45mm)
+- **Bredde** = den største af to dimensioner (f.eks. 45mm i 20×45mm)
+
+**Prioriter tykkelse først:** Ved valg af råmateriale skal tykkelsen matche først, da spild ved flækning afhænger af tykkelsen.
+
+**Spildberegning ved flækning:**
+```
+spild_per_snit = råmateriale_tykkelse × savsnit
+```
+
+**Eksempel: Færdigt produkt 20×45mm (høvlet) → kræver 26×52mm savskåret**
+
+| Råmateriale | Flækningsretning | Spild per snit |
+|-------------|------------------|----------------|
+| 26mm tykt → skær 52mm bredde | Flæk 26mm | 26mm × 4mm = **104mm²** ★ |
+| 52mm tykt → skær 26mm bredde | Flæk 52mm | 52mm × 4mm = **208mm²** |
+
+**Konklusion:** Brug 26mm råmateriale og flæk til 52mm bredde — halverer spildet sammenlignet med at bruge 52mm og flække til 26mm.
+
+**Beslutningsregel:**
+1. Find den nødvendige savskårne dimension (færdig + høvletillæg)
+2. Vælg råmateriale hvor tykkelsen matcher den *mindste* savskårne dimension
+3. Flæk til den *største* savskårne dimension
+
+## Maskiner og Kapaciteter
+
+Denne sektion beskriver vores maskinpark og deres kapaciteter for planlægning af produktion.
+
+### Kehlemaskiner (Moulders)
+
+#### Weinig Unimat 23
+Højtydende kehlemaskine til profilhøvling og dimensionshøvling.
+
+| Parameter | Værdi |
+|-----------|-------|
+| Arbejdsbredde | maks. 230mm |
+| Arbejdshøjde | maks. 120mm |
+| Antal spindler | 6 |
+| Spindelhastighed | 6.000 rpm |
+| Fremføring | 6-10 m/min |
+
+**Anvendelse:** Profilhøvling, listefremstilling, store serier.
+
+#### Weinig Powermat 1500
+Moderne kehlemaskine med avanceret styring.
+
+| Parameter | Værdi |
+|-----------|-------|
+| Arbejdsbredde | 20-230mm |
+| Arbejdshøjde | 10-160mm |
+| Antal spindler | 9 |
+| Spindelhastighed | 8.000 rpm |
+| Fremføring | 5-40 m/min |
+
+**Anvendelse:** Fleksibel produktion, hurtig omstilling, præcisionshøvling.
+
+### Firkanthøvl (4-Sided Planer)
+
+#### Weinig Cube
+Kompakt firkanthøvl til dimensionshøvling på alle fire sider i én gennemgang.
+
+| Parameter | Værdi |
+|-----------|-------|
+| Arbejdsbredde | 20-260mm |
+| Arbejdshøjde | 8-160mm |
+| Antal spindler | 4 |
+| Spindelhastighed | maks. 6.000 rpm |
+| Fremføring | 6-12 m/min |
+| Effekt | 18-28 kW |
+
+**Anvendelse:** Dimensionshøvling af emner til færdige mål, mindre serier, fleksibel produktion.
+
+### Rundsav (Sliding Table Saw)
+
+#### Altendorf F45
+Præcisions-formatrundsav med skydeanlæg.
+
+| Parameter | Værdi |
+|-----------|-------|
+| Klingekapacitet | maks. Ø450mm |
+| Skærehøjde 90° | 154mm |
+| Skærehøjde 45° | 105mm |
+| Vippefunktion | 0-46° |
+| Motor | 7,5 kW |
+
+**Anvendelse:** Præcis afkortning, formatskæring, vinklede snit, enkeltsnit og små serier.
+
+### Multisave (Multi-Rip Saws)
+
+#### Raimann ProfiRip KR 610 M
+Højtydende multisav til flækning af brædder i flere lister samtidigt.
+
+| Parameter | Værdi |
+|-----------|-------|
+| Maks. skærebredde | 610mm |
+| Maks. skærehøjde | 140mm |
+| Maks. brædebredde | 960mm |
+| Klingestørrelse | Ø250-400mm |
+| Fremføring | op til 48 m/min |
+| Motor | 55 kW |
+| Bevægelige klinger | op til 6 |
+
+**Anvendelse:** Højvolumen flækning, optimeret udbytte med bevægelige klinger.
+
+#### CML SCA650R T700
+Kraftig multisav til store emner og højt volumen.
+
+| Parameter | Værdi |
+|-----------|-------|
+| Maks. skærebredde | 650mm |
+| Faste klinger | 1-6 |
+| Type | Tungt industrielt design |
+
+**Anvendelse:** Højvolumen produktion, store dimensioner, tunge hårdttræsarter.
+
+### Optimeringskapsav (Optimization Crosscut Saw)
+
+#### Dimter OptiCut S90 XL
+Automatisk optimeringskapsav med nøjagtighedspakke til præcis afkortning og defektudskæring.
+
+| Parameter | Værdi |
+|-----------|-------|
+| Maks. emnelængde ind | 7.200mm |
+| Maks. skærelængde ud | 4.500mm |
+| Emnebredde | 20-300mm |
+| Emnetykkelse | 10-100mm |
+| Klingediameter | maks. Ø500mm |
+| Positioneringsnøjagtighed | ±0,1mm |
+| Fremføringshastighed | op til 120 m/min |
+| Motor | 7,5 kW |
+
+**Anvendelse:** Optimeret afkortning efter kapliste, defektudskæring, minimering af spild. Kan skære op til 4× så meget som manuel kapsav.
+
+### CNC-bearbejdningscenter
+
+#### Weeke Optimat BHC Venture 5M
+CNC-bearbejdningscenter til fræsning, boring og kompleks formgivning.
+
+| Parameter | Værdi |
+|-----------|-------|
+| Arbejdsområde X | ca. 5.000mm |
+| Arbejdsområde Y | ca. 1.300mm |
+| Arbejdsområde Z | ca. 150mm |
+| Spindelhastighed | 1.250-24.000 rpm |
+| Fremføring X/Y | 60-80 m/min |
+| Fremføring Z | 20 m/min |
+| Værktøjsskifter | Automatisk |
+
+**Anvendelse:** Kompleks fræsning, CNC-boring, profilfræsning, møbeldele, specialemner.
+
+### Bordfræser (Spindle Moulder)
+
+#### Casadei F25
+Bordfræser med vippebar spindel til profilfræsning og kantbearbejdning.
+
+| Parameter | Værdi |
+|-----------|-------|
+| Spindeldiameter | 1¼" (ca. 32mm) |
+| Spindelvip | ±45° |
+| Hastigheder | 3.000-10.000 rpm (5 trin) |
+| Motor | 8 HP (ca. 6 kW) |
+
+**Anvendelse:** Profilfræsning, kantbearbejdning, specialprofiler, enkeltdele og små serier.
+
+### Tykkelseshøvl (Thicknesser)
+
+#### Felder Format 4
+Tykkelseshøvl til præcis dimensionering af emnetykkelse.
+
+| Parameter | Værdi |
+|-----------|-------|
+| Høvlebredde | 510-630mm (afhænger af model) |
+| Maks. høvlehøjde | 254mm |
+| Fremføring | 4-20 m/min (variabel) |
+| Kutterdiameter | 120mm |
+| Antal knive | 4 |
+
+**Anvendelse:** Tykkelseshøvling til præcise mål, overfladebearbejdning, større emner.
+
+### Afrundingsfræser (End Rounding Machine)
+
+#### CAMAM FIS 200
+Manuel afrundingsmaskine til endefræsning og affasning.
+
+| Parameter | Værdi |
+|-----------|-------|
+| Maks. emnediameter | 200mm |
+| Min. emnetværsnit | ca. 10×10mm |
+| Spindelhastighed | 20.000 rpm |
+| Type | Manuel ilægning |
+
+**Anvendelse:** Afrunding af ender på stole- og møbeldele, affasning, endefræsning på runde og firkantede emner.
+
+### Maskinvalg efter Opgavetype
+
+| Opgave | Anbefalet Maskine |
+|--------|-------------------|
+| Afkortning (enkelt/få snit) | Altendorf F45 |
+| Afkortning (optimeret/serier) | Dimter S90 XL |
+| Flækning til flere lister | Raimann KR 610 M eller CML SCA650R |
+| Dimensionshøvling (4 sider) | Weinig Cube |
+| Tykkelseshøvling (1 side) | Felder Format 4 |
+| Profilhøvling/lister | Weinig Unimat 23 eller Powermat 1500 |
+| Store serier, profiler | Weinig Unimat 23 |
+| Fleksibel produktion | Weinig Powermat 1500 |
+| Profilfræsning/kanter | Casadei F25 |
+| CNC-fræsning/boring | Weeke Venture 5M |
+| Afrunding af ender | CAMAM FIS 200 |
+
+### Kapacitetsgrænser
+
+**Maksimale emnemål:**
+
+| Dimension | Grænse | Bestemt af |
+|-----------|--------|------------|
+| Tykkelse til høvling | 160mm | Weinig Cube/Powermat |
+| Bredde til høvling | 260mm | Weinig Cube |
+| Bredde til flækning | 610-650mm | Multisave |
+| Længde til optimeret kap | 7.200mm ind / 4.500mm ud | Dimter S90 XL |
+| CNC arbejdsområde | 5.000×1.300mm | Weeke Venture 5M |
 
 ## Træsortsreference
 
