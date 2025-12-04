@@ -788,7 +788,7 @@ Moderne kehlemaskine med avanceret styring.
 
 ### Firkanthøvl (4-Sided Planer)
 
-#### Weinig Cube
+#### Weinig Cube (S/N 10004306)
 Kompakt firkanthøvl til dimensionshøvling på alle fire sider i én gennemgang.
 
 | Parameter | Værdi |
@@ -798,7 +798,7 @@ Kompakt firkanthøvl til dimensionshøvling på alle fire sider i én gennemgang
 | Antal spindler | 4 |
 | Spindelhastighed | maks. 6.000 rpm |
 | Fremføring | 6-12 m/min |
-| Effekt | 18-28 kW |
+| Effekt | 28 kW |
 
 **Anvendelse:** Dimensionshøvling af emner til færdige mål, mindre serier, fleksibel produktion.
 
@@ -828,8 +828,9 @@ Højtydende multisav til flækning af brædder i flere lister samtidigt.
 | Maks. skærehøjde | 140mm |
 | Maks. brædebredde | 960mm |
 | Klingestørrelse | Ø250-400mm |
-| Fremføring | op til 48 m/min |
-| Motor | 55 kW |
+| Klingehastighed | 3.900 rpm |
+| Fremføring | 8-80 m/min |
+| Motor | 75 kW |
 | Bevægelige klinger | op til 6 |
 
 **Anvendelse:** Højvolumen flækning, optimeret udbytte med bevægelige klinger.
@@ -847,25 +848,29 @@ Kraftig multisav til store emner og højt volumen.
 
 ### Optimeringskapsav (Optimization Crosscut Saw)
 
-#### Dimter OptiCut S90 XL
+#### Dimter OptiCut S90 XL (S/N 9329.24)
 Automatisk optimeringskapsav med nøjagtighedspakke til præcis afkortning og defektudskæring.
 
 | Parameter | Værdi |
 |-----------|-------|
 | Maks. emnelængde ind | 7.200mm |
 | Maks. skærelængde ud | 4.500mm |
-| Emnebredde | 20-300mm |
-| Emnetykkelse | 10-100mm |
-| Klingediameter | maks. Ø500mm |
+| Klingediameter | Ø600mm |
 | Positioneringsnøjagtighed | ±0,1mm |
 | Fremføringshastighed | op til 120 m/min |
 | Motor | 7,5 kW |
+
+**Kapacitet (tykkelse/bredde):** Maks. bredde afhænger af tykkelse (klingens skærepunkter):
+| Emnetykkelse | Maks. bredde |
+|--------------|--------------|
+| 100mm | 360mm |
+| 180mm | 280mm |
 
 **Anvendelse:** Optimeret afkortning efter kapliste, defektudskæring, minimering af spild. Kan skære op til 4× så meget som manuel kapsav.
 
 ### CNC-bearbejdningscenter
 
-#### Weeke Optimat BHC Venture 5M
+#### Weeke Optimat BHC Venture 5M (2007, S/N 0-250-06-5160)
 CNC-bearbejdningscenter til fræsning, boring og kompleks formgivning.
 
 | Parameter | Værdi |
