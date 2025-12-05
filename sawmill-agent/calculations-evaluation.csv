@@ -1,0 +1,25 @@
+"# Evaluation questions for Calculations topic"
+"#"
+"# Tests unit conversion, weight calculation, waste optimization, and yield calculations"
+"#"
+question,expectedResponse,testMethodType,passingScore
+Hvor meget vejer 1 m³ europæisk eg?,720 kg,PartialMatch,
+Hvad vejer 0.5 m³ Sapelli?,315 kg,PartialMatch,
+Omregn 100 løbende meter 26×150mm til m³,"m³ = (26 × 150 × 100) / 1.000.000 = 0,39 m³",CompareMeaning,70
+Hvor mange styk 3m planker er der i 45 løbende meter?,15 styk,PartialMatch,
+Beregn m³ for 50 styk 52×100mm planker á 3.2m,"m³ = (52 × 100 × 3,2 × 50) / 1.000.000 = 0,832 m³",CompareMeaning,70
+Hvad er standard savsnit i beregninger?,4mm {or} 4 mm,PartialMatch,
+Hvor mange 1.8m emner kan jeg skære fra en 5.5m pakke?,3 emner,PartialMatch,
+Hvad er spildet hvis jeg skærer 3 styk 1.8m emner fra en 5.5m pakke med 4mm savsnit?,92mm {or} 92 mm,PartialMatch,
+Hvor mange 65mm lister kan jeg flække fra et 147mm bræt?,2 lister,PartialMatch,
+Hvis et 3m bræt har 12cm krumning og jeg skærer det til 1.5m hvad bliver krumningen så?,6cm {or} 6 cm,PartialMatch,
+Hvilken enhed bruges når bredden er varierende?,m³ {or} kubikmeter,PartialMatch,
+Hvad vejer 100 lbm 20×40mm Sapelli?,"Ca. 50 kg {or} 50,4 kg {or} omkring 50 kg",PartialMatch,
+Hvad er formlen for omregning til m³?,"m³ = (tykkelse_mm × bredde_mm × længde_m × styk) / 1.000.000",CompareMeaning,70
+Hvilken træsort vejer mest per m³?,Cumaru {or} Azobé,PartialMatch,
+Hvor meget vejer Azobé per kubikmeter?,1070 kg/m³ {or} 1070 kg,PartialMatch,
+Beregn antal emner: 6m pakke skal give 2.4m emner med 4mm savsnit,2 emner,PartialMatch,
+Hvad er spild per emne hvis jeg skærer 2.4m emner fra en 6m pakke?,"Ca. 596mm per emne {or} omkring 600mm",CompareMeaning,70
+Hvad vejer tungere - Ipé eller Jatoba?,Ipé,PartialMatch,
+Reducer krumning: 4m bræt med 8cm krumning skæres til 2m,4cm {or} 4 cm,PartialMatch,
+Hvad er typisk savsnit for en båndsav?,2-3mm,PartialMatch,

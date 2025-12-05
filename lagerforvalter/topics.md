@@ -158,6 +158,109 @@ Dette dokument beskriver de konversationsemner (topics) som lagerassistenten hå
 
 ---
 
+## 7b. Vægtberegning
+
+**Trigger Phrases:**
+- "Hvor meget vejer [mængde] m³ [træsort]?"
+- "Hvad vejer [antal] lbm [dimension] [træsort]?"
+- "Beregn vægt af [træsort]"
+- "Hvad er vægten af pakke [lotnr]?"
+- "Hvor tungt er [mængde] eg/sapelli/azobé?"
+
+**Conversation Flow:**
+1. Identificér træsort og slå vægt per m³ op:
+   - EE (Europæisk Eg): 720 kg/m³
+   - SA (Sapelli): 630 kg/m³
+   - AZ (Azobé): 1070 kg/m³
+   - IP (Ipé): 1050 kg/m³
+   - JA (Jatoba): 910 kg/m³
+   - (se komplet liste i calculations-knowledge.md)
+2. Identificér mængde - omregn til m³ hvis nødvendigt
+3. Beregn vægt: `vægt_kg = m³ × vægt_kg_per_m³`
+4. Vis resultat med beregningsforklaring
+
+**Beregningseksempel:**
+```
+100 lbm 20×40mm Sapelli:
+- m³ = (20 × 40 × 100) / 1.000.000 = 0,08 m³
+- Sapelli = 630 kg/m³
+- Vægt = 0,08 × 630 = 50,4 kg
+```
+
+**Entities:**
+- `mængde`: Numerisk værdi
+- `enhed`: m³, lbm, stk
+- `træsort`: Træsortkode eller navn
+- `dimensioner`: Tykkelse og bredde (påkrævet hvis ikke m³)
+
+---
+
+## 7c. Spild- og Udbytteberegning
+
+**Trigger Phrases:**
+- "Hvor mange [længde]m emner kan jeg skære fra [pakkelængde]m?"
+- "Beregn spild for [emnelængde] fra [pakkelængde]"
+- "Optimér afkortning for [længde]m emner"
+- "Hvor mange lister kan jeg flække fra [bredde]mm?"
+- "Hvad er udbyttet ved flækning af [bredde] til [listebredde]?"
+
+**Conversation Flow:**
+1. Identificér opgavetype: længdeoptimering eller flækning
+2. For længdeoptimering:
+   - `emner = floor(pakke_længde_mm / (emne_længde_mm + 4))`
+   - `spild = pakke_længde - (emner × emne_længde) - ((emner - 1) × 4)`
+3. For flækning:
+   - `lister = floor(bræt_bredde_mm / (liste_bredde_mm + 4))`
+   - `spild = bræt_bredde - (lister × liste_bredde) - ((lister - 1) × 4)`
+4. Vis beregning med spild per emne
+5. Sammenlign flere pakkelængder hvis relevant
+
+**Beregningseksempel (længde):**
+```
+1,8m emner fra 5,5m pakke (4mm savsnit):
+- emner = floor(5500 / 1804) = 3
+- spild = 5500 - (3 × 1800) - (2 × 4) = 92mm
+- spild per emne = 31mm
+```
+
+**Entities:**
+- `emneLængde`: Ønsket emnelængde i mm eller m
+- `pakkeLængde`: Pakkelængde i mm eller m
+- `bredde`: Brætbredde i mm
+- `listeBredde`: Ønsket listebredde i mm
+- `savsnit`: Standard 4mm hvis ikke angivet
+
+---
+
+## 7d. Krumningsberegning
+
+**Trigger Phrases:**
+- "Hvad bliver krumningen hvis jeg skærer [længde] ned til [ny længde]?"
+- "Reducerer afkortning krumning?"
+- "Beregn krumning efter afkortning"
+- "Kan et krumt bræt høvles efter afkortning?"
+
+**Conversation Flow:**
+1. Identificér original længde og krumning
+2. Identificér ny længde efter afkortning
+3. Beregn ny krumning: `ny_krumning = original_krumning × (ny_længde / original_længde)`
+4. Vurder om emnet nu kan høvles (typisk maks 5-10mm krumning)
+
+**Beregningseksempel:**
+```
+3,0m bræt med 12cm krumning skæres til 1,5m:
+- ny_krumning = 12cm × (1,5 / 3,0) = 6cm
+```
+
+**Regel:** Halvering af længden halverer krumningen.
+
+**Entities:**
+- `originalLængde`: Original længde
+- `originalKrumning`: Målt krumning
+- `nyLængde`: Længde efter afkortning
+
+---
+
 ## 8. Savskåret til Høvlet Beregning
 
 **Trigger Phrases:**

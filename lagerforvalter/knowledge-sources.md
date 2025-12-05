@@ -61,26 +61,37 @@ Returnerer reservationer på lot-niveau.
 
 ---
 
-## 2. Warehouse Knowledge Document (Sekundær)
+## 2. Warehouse Knowledge Documents (Sekundær)
 
 ### Beskrivelse
-Statisk videnbase med domæneviden om træsorter, beregningsformler, dimensioner og forretningsregler.
+Statisk videnbase med domæneviden om træsorter, beregningsformler, dimensioner og forretningsregler. Opdelt i mindre filer for bedre retrieval.
 
 ### Type
 File Upload (Markdown)
 
-### Fil
-`warehouse-knowledge.md`
+### Filer
+`warehouse-knowledge/` mappe med følgende filer:
 
-### Indhold
-- Varenummerformat og afkodning
-- Træsortstabel med koder og navne
-- Mængdeenheder og omregningsformler
-- Savskåret vs høvlet konvertering
-- Kvalitets- og certificeringsregler
-- Lagerplaceringer (bins) beskrivelse
-- Typiske dimensioner per træsort
-- Optimeringsberegninger for spild
+| Fil | Indhold |
+|-----|---------|
+| `api-reference.md` | BC integration, API-kald, filtre, dataformater, varenumre |
+| `calculations.md` | Omregningsformler, vægt, savsnit, optimering, spild, krumning |
+| `business-rules.md` | Kvalitet, FSC, høvletillæg, pakkevalg, S-kvalitet prioritering |
+| `machines.md` | Maskinpark, kapaciteter, maskinvalg |
+| `wood-species.md` | Træsorter med koder, vægt per m³ (30+ arter), typiske dimensioner |
+| `locations.md` | Lagerplaceringer (bins) |
+
+### Beregningskapabiliteter
+
+Agenten kan udføre følgende beregninger ved at kombinere formler fra `calculations.md` med vægtdata fra `wood-species.md`:
+
+| Beregning | Formel | Eksempel |
+|-----------|--------|----------|
+| Volumen | `m³ = (t×b×l×stk) / 1.000.000` | 52×100mm, 3,2m, 50stk = 0,832 m³ |
+| Vægt | `kg = m³ × vægt_per_m³` | 0,08 m³ Sapelli = 50,4 kg |
+| Emner fra pakke | `floor(pakke / (emne + savsnit))` | 5,5m → 3 stk 1,8m emner |
+| Lister fra bræt | `floor(bredde / (liste + savsnit))` | 147mm → 2 stk 65mm lister |
+| Krumningsreduktion | `ny = orig × (ny_l / orig_l)` | 3m/12cm → 1,5m/6cm |
 
 ### Markér som Official Source
 **Ja** - Dette er verificeret domæneviden som kan bruges direkte.
